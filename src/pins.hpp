@@ -21,5 +21,6 @@
 #define PIN_IMU_SDA 17
 #define PIN_IMU_SCL 16
 #define WIRE_IMU Wire1
+#define ADDRESS_IMU 0x6A
 
 #endif /* _PINS_HPP */
