@@ -17,6 +17,7 @@
 #define PIN_BLUETOOTH_TX 20
 #define PIN_BLUETOOTH_RX 21
 #define SERIAL_BLUETOOTH Serial5
+#define BAUD_BLUETOOTH 9600
 
 #define PIN_IMU_SDA 17
 #define PIN_IMU_SCL 16

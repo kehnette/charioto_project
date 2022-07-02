@@ -5,7 +5,6 @@
 #include "math.h"
 #include <Wire.h>
 
-/*
 AccelStepper leftMot;
 int i = 0;
 uint64_t millisLedOn = 0;
@@ -51,8 +50,8 @@ void loop() {
   i++;
 }
 
-*/
 
+/*
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -63,4 +62,4 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   Serial.println(SERIAL_GPS.readString());
-}
+}*/
