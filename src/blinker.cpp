@@ -1,11 +1,16 @@
 #include "blinker.hpp" //Import header, because it is here that the class is defined.
 #include "Arduino.h"
 
+Blinker::Blinker(){
+    //Empty constructor
+}
+
 //Constructors
-Blinker::Blinker(uint8_t pin_blink){
-    this->pin_blink = pin_blink;
-    pinMode(pin_blink,OUTPUT);
-    enabled = false;
+Blinker::Blinker(uint8_t pinBlink){
+    this->pinBlink = pinBlink;
+    pinMode(pinBlink,OUTPUT);;
+    disable();
+
 }
 
 //Setters
@@ -20,12 +25,12 @@ void Blinker::setBlinkTimeOn(uint32_t blinkTimeOn){
 void Blinker::enable(){
     enabled = true; //this-> is mandatory only when there might be a confusion. Writing "this->" can be useful to let VSC show you all your class attributes
     this->millisLastRisingOn = millis();
-    digitalWrite(pin_blink,HIGH);
+    powerLED();
 }
 
 void Blinker::disable(){
     enabled = false;
-    digitalWrite(pin_blink,LOW);
+    shutDownLED();
 }
 
 bool Blinker::isEnabled(){
@@ -41,11 +46,25 @@ uint32_t Blinker::getBlinkTimeOn(){
     return blinkTimeOn;
 }
 
+void Blinker::shutDownLED(){
+    digitalWrite(pinBlink,LOW);
+    ledOn = false;
+}
+
+void Blinker::powerLED(){
+    digitalWrite(pinBlink,HIGH);
+    if (!ledOn)
+        millisLastRisingOn = millis(); //The led was OFF, so it is a rising edge
+    ledOn = true;
+}
+
 //Updater
 void Blinker::update(){
     if (enabled){
         uint32_t m = millis();
-        
-    }
-    
+        if (ledOn && m-millisLastRisingOn>blinkTimeOn)
+            shutDownLED();
+        else if (!ledOn && m-millisLastRisingOn>blinkPeriod)
+            powerLED();
+    }  
 }

@@ -9,7 +9,8 @@ class Blinker{
 public:
 
     //Constructors
-    Blinker(uint8_t pin_blink); // stdint.h allows for a precise control of the number of bits
+    Blinker();
+    Blinker(uint8_t pinBlink); // stdint.h allows for a precise control of the number of bits
     
     //Setters
     void setBlinkPeriod(uint32_t blinkPeriod); // Set the period between blinks (ms)
@@ -33,11 +34,14 @@ public:
     void update(); //To be called as much as possible
 
 private:
-    uint8_t pin_blink;
+    void shutDownLED();
+    void powerLED();
+    uint8_t pinBlink;
     uint32_t millisLastRisingOn;
     uint32_t blinkPeriod;
     uint32_t blinkTimeOn;
     bool enabled;
+    bool ledOn;
 }; //Ne pas oublier le ;
 
 #endif /* _BLINKER_HPP */
