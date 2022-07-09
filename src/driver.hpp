@@ -3,6 +3,7 @@
 
 #include "stdint.h"
 #include "IntervalTimer.h"
+#define MAX_NB_OF_DRIVERS 2
 
 class Driver{
 public:
@@ -15,8 +16,8 @@ public:
     void enable();
     void disable();
     bool isEnabled();
-    void setMaxSpeed(uint32_t maxSpeed); //In step per second
-    void setCurrentSpeed(int64_t currentSpeed); //In step per second
+    void setMaxSpeed(uint32_t maxSpeed); //In step per second.
+    void setCurrentSpeed(int64_t currentSpeed); //In step per second. Positive is clockwise
     
 
 private:
@@ -45,7 +46,9 @@ private:
     static bool intTimerStarted;
     static void updateAllDrivers();
     static uint32_t timeClockInterval; //microseconds
+    static void recomputeCurrentNbOfClockTicksBetweenRisingEdges();
     
+    //Other privates
     void step();
     void release();
 };

@@ -9,17 +9,17 @@ void debuggerInit(){
 }
 
 void debuggerBlue(uint8_t level){
-    digitalWrite(10,level);
+    digitalWriteFast(10,level);
 }
 
 void debuggerRed(uint8_t level){
-    digitalWrite(9,level);
+    digitalWriteFast(9,level);
 }
 
 void debuggerGreen(uint8_t level){
-    digitalWrite(11,level);
+    digitalWriteFast(11,level);
 }
 
 void debuggerBlack(uint8_t level){
-    digitalWrite(8,level);
+    digitalWriteFast(8,level);
 }

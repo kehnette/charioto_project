@@ -5,6 +5,7 @@
 #include "debugger.hpp"
 
 Driver* leftMot;
+Driver* rightMot;
 int i = 0;
 uint64_t millisLedOn = 0;
 
@@ -14,11 +15,16 @@ void setup() {
 
   pinMode(PIN_BATT,INPUT);
 
-  leftMot = new Driver(PIN_MOTOR_G_STEP,PIN_MOTOR_G_DIR,PIN_MOTOR_ENABLED,50000,Driver::ESIDES::LEFT);
+  Serial.println("Left");
+  leftMot = new Driver(PIN_MOTOR_G_STEP,PIN_MOTOR_G_DIR,PIN_MOTOR_ENABLED,25000,Driver::ESIDES::LEFT);
   leftMot->setCurrentSpeed(500);
   leftMot->enable();
-  debuggerInit();
 
+  Serial.println("Right");
+  rightMot = new Driver(PIN_MOTOR_D_STEP,PIN_MOTOR_D_DIR,PIN_MOTOR_ENABLED,50000,Driver::ESIDES::RIGHT);
+  rightMot->setCurrentSpeed(500);
+  rightMot->enable();
+  debuggerInit();
 }
 
 void loop() {
@@ -27,15 +33,16 @@ void loop() {
 
   
   float period = 5; //s
-  float amplitude = 25000; //tick/s
+  float amplitude = 5000; //tick/s
   float x = sin(2*3.1415/period*millis()/1000)*amplitude;
   leftMot->setCurrentSpeed(x);
+  rightMot->setCurrentSpeed(x*0.9);
   //Serial.println(x);
 
   
 
-  //if (i%5000==0)
-    //Serial.println(analogRead(PIN_BATT)/1023.0*16.6);
+  if (i%500==0)
+    Serial.println(analogRead(PIN_BATT)/1023.0*16.6);
 
   if (millis()-millisLedOn<100)
     digitalWrite(LED_BUILTIN,HIGH);
