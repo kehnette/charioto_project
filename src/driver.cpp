@@ -73,9 +73,7 @@ void Driver::updateAllDrivers(){
         if (listOfDriversToUpdate[d] != nullptr && listOfDriversToUpdate[d]->isEnabled() && listOfDriversToUpdate[d]->currentSpeed != 0){
             
             Driver* driver = listOfDriversToUpdate[d];
-            //Serial.print("updt"); Serial.println(driver->currentNbOfTicks);
             driver->currentNbOfTicks++;
-            //Serial.println(driver->currentNbOfClockTicksBetweenRisingEdges);
             if (driver->currentNbOfTicks > driver->currentNbOfClockTicksBetweenRisingEdges)
                 driver->currentNbOfTicks = 0;
 
@@ -121,8 +119,7 @@ void Driver::setCurrentSpeed(int64_t currentSpeed){//In step per second
     this->currentSpeed = currentSpeed;
     if (currentSpeed != 0){
         this->currentNbOfClockTicksBetweenRisingEdges = this->currentMicrosBetweenSteps()/Driver::timeClockInterval;
-        Serial.print("Setting currentNbOfClockTicksBetweenRisingEdges at");Serial.println(this->currentNbOfClockTicksBetweenRisingEdges);
-        Serial.println((uint32_t)&this->currentNbOfClockTicksBetweenRisingEdges);
+
         if (currentSpeed>0){
             clockwise = true;
             digitalWrite(dirPin,HIGH);
@@ -132,9 +129,10 @@ void Driver::setCurrentSpeed(int64_t currentSpeed){//In step per second
             digitalWrite(dirPin,LOW);
         }
     }
-
-
     interrupts();
+
+    Serial.print("Setting currentNbOfClockTicksBetweenRisingEdges at");Serial.println(this->currentNbOfClockTicksBetweenRisingEdges);
+    Serial.println((uint32_t)&this->currentNbOfClockTicksBetweenRisingEdges);
 } 
 
 void Driver::step(){
