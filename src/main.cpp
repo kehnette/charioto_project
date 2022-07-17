@@ -7,8 +7,10 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   blk = Blinker(LED_BUILTIN);
-  blk.setBlinkPeriod(1000);
-  blk.setBlinkTimeOn(10);
+  blk.setBlinkPeriod(10000);
+  blk.setBlinkTimeOn(500);
+  blk.setBlinkPerPeriod(3);
+  blk.setTimeBetweenBlinks(1146);
 
   //Emptying serial buffer
   while (Serial.available() > 0) {

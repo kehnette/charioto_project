@@ -18,9 +18,11 @@ public:
     /*
         O = On
         x = Off
-        OxxxxOxxxxOxxxxOxxxx    is BlinkPeriod of 5ms and an BlinkTimeOn of 1ms
-        OOxOOxOOxOOx            is BlinkPeriod of 3ms and an BlinkTimeOn of 2ms
+        OxxxxOxxxxOxxxxOxxxx    is BlinkPeriod of 5ms and a BlinkTimeOn of 1ms
+        OOxOOxOOxOOx            is BlinkPeriod of 3ms and a BlinkTimeOn of 2ms
     */
+    void setBlinkPerPeriod(uint8_t nbBlinks);
+    void setTimeBetweenBlinks(uint32_t timeBetweenBlinks);
 
     void enable();
     void disable();
@@ -42,6 +44,9 @@ private:
     uint32_t blinkTimeOn;
     bool enabled;
     bool ledOn;
+    uint8_t nbBlinks;
+    uint32_t timeBetweenBlinks;
+    uint32_t T0=0;
 }; //Ne pas oublier le ;
 
 #endif /* _BLINKER_HPP */
