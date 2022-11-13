@@ -1,3 +1,5 @@
 Liens vers les docs utiles ici:
 
 <THEME>		<NOM_DOC>	<LIEN>
+
+ENCODAGE    float format    https://en.wikipedia.org/wiki/Double-precision_floating-point_format
