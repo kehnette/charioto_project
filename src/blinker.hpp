@@ -21,7 +21,7 @@ public:
         OxxxxOxxxxOxxxxOxxxx    is BlinkPeriod of 5ms and a BlinkTimeOn of 1ms
         OOxOOxOOxOOx            is BlinkPeriod of 3ms and a BlinkTimeOn of 2ms
     */
-    void setBlinkPerPeriod(uint8_t nbBlinks);
+    void setBlinkPerPeriod(uint32_t nbBlinks);
     void setTimeBetweenBlinks(uint32_t timeBetweenBlinks);
 
     void enable();
@@ -44,7 +44,7 @@ private:
     uint32_t blinkTimeOn;
     bool enabled;
     bool ledOn;
-    uint8_t nbBlinks;
+    uint32_t nbBlinks;
     uint32_t timeBetweenBlinks;
     uint32_t T0=0;
 }; //Ne pas oublier le ;

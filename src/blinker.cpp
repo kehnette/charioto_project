@@ -23,7 +23,7 @@ void Blinker::setBlinkTimeOn(uint32_t blinkTimeOn){
     this->blinkTimeOn = blinkTimeOn;
 }
 
-void Blinker::setBlinkPerPeriod(uint8_t nbBlinks)
+void Blinker::setBlinkPerPeriod(uint32_t nbBlinks)
 {
     this->nbBlinks=nbBlinks;
 }
@@ -86,7 +86,7 @@ void Blinker::update(){
             uint32_t endN=startN+blinkTimeOn;
             if (m<endN && m>startN)
             {
-                Serial.print("ON seg");Serial.println(N);
+                //Serial.print("ON seg");Serial.println(N);
                 powerLED();
             }
         }
@@ -96,13 +96,13 @@ void Blinker::update(){
             uint32_t endNm1=startN-(timeBetweenBlinks-blinkTimeOn);
             if (m<startN && m>endNm1)
             {
-                Serial.print("OFF seg");Serial.println(N);
+                //Serial.print("OFF seg");Serial.println(N);
                 shutDownLED();
             }
         }
         if (m>T0+(nbBlinks-1)*timeBetweenBlinks+blinkTimeOn && m<T0+blinkPeriod)
         {
-            Serial.print("OFF final");
+            //Serial.print("OFF final");
             shutDownLED();
         }
     }
