@@ -84,18 +84,41 @@ Position Position::operator* (float other)
     return pos;
 }
 
-int Position::operator% (Position const &other)
+float Position::operator% (Position &other)
 {
-    int output = 0;
-    if ((other.cap - this->cap)%360 < 180)
+    double X1 = this->getX(); //P1.X1
+    double X2 = other.getX(); //P2.X2
+    double Y1 = this->getY(); //P1.Y1
+    double Y2 = other.getY(); //P2.Y2
+    double X = X2-X1;
+    double Y = Y2-Y1;
+    float output = 0; //le cap entre les deux point P1 et P2
+    float alpha = 0;
+    double H = *this>>other;
+
+    if (X > 0)
     {
-        output = (other.cap - this->cap)%360;
-        return output;
+        alpha = asin(Y/H);
+        if (Y > 0) //On entre dans le cas 1
+        {
+            output = 90 - alpha;
+        }
+        else //On entre dans le cas 2
+        {
+            output = alpha + 90;
+        }
     }
     else
     {
-        output = -(360 - ((other.cap - this->cap)%360));
-        return output;
+        alpha = asin(X/H);
+        if (Y > 0) //On entre dans le cas 3
+        {
+            output = 360 - alpha;
+        }
+        else // On entre dans le cas 4
+        {
+            output = 270 - alpha;
+        }
     }
 }
 
@@ -108,11 +131,14 @@ float Position::operator>> (Position &other)
     return sqrt(deltaX*deltaX + deltaY*deltaY);
 }
 
-float Position::moduloFloat(float x){
-    while (x>=360){
+float Position::moduloFloat360(float x)
+{
+    while (x>=360)
+    {
         x = x - 360;
     }
-    while (x<0){
+    while (x<0)
+    {
         x = x + 360;
     }
     return x;

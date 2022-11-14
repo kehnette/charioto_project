@@ -16,20 +16,20 @@ public:
     Position(double latitude, double longitude, float cap);
     double latitude;
     double longitude;
-    int cap;
+    float cap;
     double getX();
     double getY();
     static void initPosition0(double latitude, double longitude);
     Position operator+ (Position const &other);
     Position operator- (Position const &other);
     Position operator* (float other);
-    int operator% (Position const &other);
-    //- - -> Donne le delta entre deux caps
+    float operator% (Position &other);
+    //- - -> Donne le cap reliant deux points
     float operator>> (Position &other);
     //- - -> Donne la distance entre deux Positions
 
 private:
-    static float moduloFloat(float x); //Returns number x in the [0,359] range. Static because it does not depends on the actual object.
+    static float moduloFloat360(float x); //Returns number x in the [0,359] range. Static because it does not depends on the actual object.
     static double lat0;
     static double long0;
     static bool initialized;
