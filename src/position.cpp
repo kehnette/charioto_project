@@ -107,3 +107,13 @@ float Position::operator>> (Position &other)
     deltaY = this->getY() - other.getY();
     return sqrt(deltaX*deltaX + deltaY*deltaY);
 }
+
+float Position::moduloFloat(float x){
+    while (x>=360){
+        x = x - 360;
+    }
+    while (x<0){
+        x = x + 360;
+    }
+    return x;
+}

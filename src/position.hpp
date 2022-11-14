@@ -29,6 +29,7 @@ public:
     //- - -> Donne la distance entre deux Positions
 
 private:
+    static float moduloFloat(float x); //Returns number x in the [0,359] range. Static because it does not depends on the actual object.
     static double lat0;
     static double long0;
     static bool initialized;
