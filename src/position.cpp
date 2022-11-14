@@ -120,6 +120,7 @@ float Position::operator% (Position &other)
             output = 270 - alpha;
         }
     }
+    return output;
 }
 
 float Position::operator>> (Position &other)
